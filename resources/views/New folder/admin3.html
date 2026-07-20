@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Griya Sukabumi Indah - Detail Properti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#a8e7c5",
+                    "on-background": "#0b1c30",
+                    "on-tertiary-container": "#ffd0b8",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#95d4b3",
+                    "secondary-container": "#4069f2",
+                    "on-tertiary-fixed": "#341100",
+                    "tertiary": "#793200",
+                    "on-primary-fixed-variant": "#0e5138",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary-container": "#9e4400",
+                    "surface-container-low": "#eff4ff",
+                    "secondary-fixed": "#dce1ff",
+                    "inverse-surface": "#213145",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "secondary-fixed-dim": "#b7c4ff",
+                    "on-surface-variant": "#404943",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#95d4b3",
+                    "primary-container": "#2d6a4f",
+                    "on-secondary-fixed": "#001551",
+                    "surface": "#f8f9ff",
+                    "on-surface": "#0b1c30",
+                    "inverse-on-surface": "#eaf1ff",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "on-secondary-fixed-variant": "#0039b5",
+                    "background": "#f8f9ff",
+                    "surface-tint": "#2c694e",
+                    "on-primary-fixed": "#002114",
+                    "outline-variant": "#bfc9c1",
+                    "outline": "#707973",
+                    "secondary": "#1d4ed8",
+                    "surface-dim": "#cbdbf5",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#ffdbca",
+                    "on-secondary-container": "#fffbff",
+                    "surface-container-high": "#dce9ff",
+                    "primary-fixed": "#b1f0ce",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container": "#e5eeff",
+                    "primary": "#0f5238",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sidebar-width": "360px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max-width": "1440px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "stats-number": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "stats-number": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d6a4f;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-[100] flex justify-between items-center px-margin-desktop h-16 max-w-full mx-auto bg-surface/90 backdrop-blur-md border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Sukabumi GIS Housing</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-title-lg text-title-lg text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Explore</a>
+<a class="font-title-lg text-title-lg text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Zoning</a>
+<a class="font-title-lg text-title-lg text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Investment</a>
+<a class="font-title-lg text-title-lg text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors" href="#">Stats</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<!-- Breadcrumb -->
+<nav class="flex items-center gap-2 mb-6 text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Beranda</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Katalog Perumahan</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Griya Sukabumi Indah</span>
+</nav>
+<!-- Hero Gallery -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-[300px] md:h-[500px] mb-8">
+<div class="md:col-span-3 relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, wide-angle photograph of a modern minimalist house in Sukabumi, Indonesia. The exterior features clean white lines, natural stone accents, and a sloping anthracite roof. The property is surrounded by lush tropical greenery and set against a soft, golden hour sky that highlights the architectural details. The atmosphere is serene, high-end, and professional, reflecting a trustworthy housing development." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD937B9ochL8gz7DcjzGWRjB-e44i_ci2RsrJ8jJQgpGyEcgSvok_aq3TCsSGIIuWy3GQa8WSzCJjABZ7_2traSwPx5pXqUjSYDeiD-BtgAjGUN27fluIjCBiUtFmCfzzao3OyShl6At9jwvuqI0yyCxvAxPHIdAzAXe-PtubwgHkSApxdjO-kIqhSmr2Kr42Z6Uml5xqrtxtA5MAxQMHC4svUdZokbxey7z3shKlsWeG2ZA6kqo8Xo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+</div>
+<div class="hidden md:grid grid-rows-3 gap-4">
+<div class="relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up detail of the modern interior living room in a Sukabumi housing project, featuring high ceilings and large windows that let in natural light. The decor is minimalist with earthy tones, polished ceramic floors, and a view of the private garden outside. The lighting is soft and airy, creating a professional and inviting aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkFYnINBvki5ATLvIhFZU7TJFFLwMD9GtBMeck0KBEWi9LNBJ2iuhsi86wUx-K6bpLGuuGtYGEkUfR7pHO1wEjNclK8H1tF_7j0Elq28u0CtaDMUfs-CKbh4AXV7rOFX8On1Bc4N19cV53-vbqBSX9p6Nu9wkulT0JMAxxURzx3ayWOuZ-6KLcYFqXIDxettPhTaZLMXVSYDXb9n8tUjk8sMxjHXjly-PFafyGsFioQkIUPXRBNgVN"/>
+</div>
+<div class="relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A high-quality architectural photo of the master bedroom in the Griya Sukabumi Indah complex. The room showcases a minimalist design with a neutral color palette, wooden furniture accents, and premium finishes. The morning sunlight streams through a large window, emphasizing the clean and peaceful environment designed for administrative and residential trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyrr21VcAPbDST9kBCEB-KKU_0iOXa-u252B7o3vaCxt0zIijeLBkQtQFQz0PB02B3HqD8EoxEztohcwSI_RrAKbnolaVe0XfaUoQHV7vq6QrvBGVkv6ttEXLx-K5IzTB9ZiSXzNlUedrQ3cnZE9oML30vI0xSJ_C-HKkbYxdttTUrOhptGDSJDfNHzvCmyvGOzG9ZpwVIbX9smvMP9mVPw1c1IWBfOTdGm7G_f-IfUnrXyAW2BXo6"/>
+</div>
+<div class="relative group overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Exterior view of the Griya Sukabumi Indah housing estate at twilight, showing the gated community's wide paved roads and modern street lighting. The houses are uniformly designed with a contemporary Indonesian style, surrounded by manicured lawns and tropical plants under a deep blue dusk sky, conveying safety and community planning." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB45BqbmP3tOAQy2adL75YSjShgOcNBxc-aNTS6hbB17UqMmE6pJzTEGA7dWZLVBXGVhRpm5JGI4yDkjGLazXdGN8C6Z1gYxrzJim321i5zoMpHnm11CUlQxop1honX_RIMOUTz-kBRHdXyxa61GSHVzVSFHQ_RrwhuxbdUx0oK9RcPmW4GNPIGK1_MNz5QezIr8w2Yyc9MypEjqXIf3FTMT9bPTBAT-DlbsCMDoGmGDCsKG3hkJyqR"/>
+</div>
+</div>
+</div>
+<!-- Property Info Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<div class="flex gap-2 mb-2">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed text-label-md font-label-md rounded-full uppercase tracking-wider">Subsidi</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-label-md font-label-md rounded-full uppercase tracking-wider">Tersedia</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Griya Sukabumi Indah</h1>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-lg text-body-lg">
+<span class="material-symbols-outlined text-primary">location_on</span>
+                    Cibadak, Sukabumi
+                </div>
+</div>
+<div class="text-left md:text-right">
+<p class="text-on-surface-variant font-label-md text-label-md mb-1">Mulai dari</p>
+<h2 class="font-display-lg text-display-lg text-primary leading-none">Rp 160jt - 350jt</h2>
+</div>
+</div>
+<!-- Quick Specs Row -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-surface-container-lowest border border-outline-variant rounded-2xl mb-12 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-container/10 text-primary rounded-xl">
+<span class="material-symbols-outlined">square_foot</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md">Luas Tanah</p>
+<p class="font-title-lg text-title-lg">60m²</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-container/10 text-primary rounded-xl">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md">Luas Bangunan</p>
+<p class="font-title-lg text-title-lg">36m²</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-container/10 text-primary rounded-xl">
+<span class="material-symbols-outlined">bed</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md">Kamar Tidur</p>
+<p class="font-title-lg text-title-lg">2</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-primary-container/10 text-primary rounded-xl">
+<span class="material-symbols-outlined">bathtub</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md">Kamar Mandi</p>
+<p class="font-title-lg text-title-lg">1</p>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column -->
+<div class="flex-1 space-y-12">
+<!-- Description -->
+<section>
+<h3 class="font-headline-md text-headline-md mb-4 border-l-4 border-primary pl-4">Deskripsi Perumahan</h3>
+<div class="text-on-surface-variant space-y-4 font-body-lg text-body-lg leading-relaxed">
+<p>Griya Sukabumi Indah adalah hunian eksklusif yang memadukan kenyamanan modern dengan keindahan alam Sukabumi. Berlokasi strategis di kawasan Cibadak, perumahan ini menawarkan akses mudah ke fasilitas umum namun tetap menjaga ketenangan lingkungan hunian yang asri dan udara yang bersih.</p>
+<p>Dikembangkan dengan standar kualitas tinggi, setiap unit dirancang untuk efisiensi ruang maksimal. Perumahan ini telah memiliki legalitas lengkap mulai dari Sertifikat Hak Milik (SHM) hingga IMB, menjamin keamanan investasi properti Anda bagi masa depan keluarga.</p>
+</div>
+</section>
+<!-- Facilities -->
+<section>
+<h3 class="font-headline-md text-headline-md mb-6">Fasilitas Unggulan</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex items-center gap-4 p-4 bg-surface rounded-xl border border-outline-variant transition-all hover:shadow-md">
+<span class="material-symbols-outlined text-primary filled-icon p-2 bg-primary/5 rounded-lg">security</span>
+<span class="font-title-lg text-title-lg">Security 24 Jam</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface rounded-xl border border-outline-variant transition-all hover:shadow-md">
+<span class="material-symbols-outlined text-primary filled-icon p-2 bg-primary/5 rounded-lg">mosque</span>
+<span class="font-title-lg text-title-lg">Masjid Jami</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface rounded-xl border border-outline-variant transition-all hover:shadow-md">
+<span class="material-symbols-outlined text-primary filled-icon p-2 bg-primary/5 rounded-lg">child_care</span>
+<span class="font-title-lg text-title-lg">Taman Bermain</span>
+</div>
+<div class="flex items-center gap-4 p-4 bg-surface rounded-xl border border-outline-variant transition-all hover:shadow-md">
+<span class="material-symbols-outlined text-primary filled-icon p-2 bg-primary/5 rounded-lg">park</span>
+<span class="font-title-lg text-title-lg">Ruang Terbuka Hijau</span>
+</div>
+</div>
+</section>
+<!-- Specification Detail -->
+<section>
+<h3 class="font-headline-md text-headline-md mb-6">Spesifikasi Teknis</h3>
+<div class="overflow-hidden border border-outline-variant rounded-2xl">
+<table class="w-full text-left">
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant w-1/3">Pondasi</th>
+<td class="py-4 px-6 text-on-surface">Batu Kali / Beton Bertulang</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant">Dinding</th>
+<td class="py-4 px-6 text-on-surface">Bata Merah / Hebel Finish Cat</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant">Lantai</th>
+<td class="py-4 px-6 text-on-surface">Granit 60x60 (Utama) &amp; Keramik (KM)</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant">Atap</th>
+<td class="py-4 px-6 text-on-surface">Rangka Baja Ringan &amp; Genteng Metal</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant">Sanitasi</th>
+<td class="py-4 px-6 text-on-surface">Closet Duduk &amp; Shower</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<th class="py-4 px-6 font-semibold bg-surface-container-low text-on-surface-variant">Listrik &amp; Air</th>
+<td class="py-4 px-6 text-on-surface">1300 VA &amp; Sumur Bor / PDAM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column (Sidebar) -->
+<div class="w-full lg:w-sidebar-width shrink-0">
+<div class="sticky top-24 space-y-6">
+<!-- Developer Card -->
+<div class="p-6 bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center font-bold text-headline-md">
+                                SB
+                            </div>
+<div>
+<div class="flex items-center gap-1">
+<h4 class="font-title-lg text-title-lg leading-tight">PT. Sukabumi Bangun Sejahtera</h4>
+<span class="material-symbols-outlined text-blue-500 filled-icon text-[18px]">verified</span>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Pengembang Terverifikasi</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Proyek Berjalan</span>
+<span class="font-bold">12 Proyek</span>
+</div>
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Pengalaman</span>
+<span class="font-bold">15 Tahun</span>
+</div>
+</div>
+</div>
+<!-- Contact Form -->
+<div class="p-6 bg-surface border border-outline-variant rounded-2xl shadow-sm">
+<h4 class="font-title-lg text-title-lg mb-4 text-on-surface">Tanyakan Informasi</h4>
+<form class="space-y-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1 ml-1">Nama Lengkap</label>
+<input class="w-full px-4 py-3 bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Masukkan nama" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1 ml-1">Nomor Telepon</label>
+<input class="w-full px-4 py-3 bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="08xx xxxx xxxx" type="tel"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1 ml-1">Pesan</label>
+<textarea class="w-full px-4 py-3 bg-background border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" rows="3">Saya tertarik dengan perumahan ini dan ingin menanyakan detail cicilan.</textarea>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-title-lg text-title-lg rounded-xl hover:bg-primary-container transition-all active:scale-[0.98] shadow-lg shadow-primary/20" type="button">
+                                Hubungi Pengembang
+                            </button>
+<p class="text-center font-label-md text-label-md text-on-surface-variant">Tersedia via WhatsApp &amp; Telepon</p>
+</form>
+</div>
+<!-- CTA Mini Badge -->
+<div class="p-4 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-[32px]">local_offer</span>
+<p class="font-body-md text-body-md leading-tight">Dapatkan promo <strong>DP 0%</strong> khusus bulan ini!</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Section -->
+<section class="mt-16">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md">Lokasi &amp; Akses</h3>
+<button class="flex items-center gap-2 text-primary font-semibold hover:underline">
+<span class="material-symbols-outlined">directions</span>
+                    Petunjuk Arah
+                </button>
+</div>
+<div class="relative w-full h-[450px] rounded-2xl overflow-hidden border border-outline-variant group">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist high-contrast digital map showing the Cibadak region of Sukabumi, West Java. The map uses a professional aesthetic with subtle grey roads, soft green parks, and a prominent green marker indicating the location of Griya Sukabumi Indah. The style is modern GIS-centric with no cluttered UI, focusing on the geographical layout." data-location="Sukabumi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArrx-sljTS5zFLz_QYY5JwzFmYl6IuR17GtWSWnc85a4fhIL4H8eZGAkocTNQ6Y2S6kx4cU3nFsinR6jkgqdpOGgoHOVjTnyJKZYJSbSUiCkXLMuAmF5UY-VYeytxYonZtT7ou0FH-ZkYGcybRzVraMPOulUhbCBKCHPQBeM0TdtEgf7A8Z6s6CfSXLEQ_JdSuIdDmLVAWGtR-0YExuJqnPUqwK60eChRiLSDB9ZpM5ueLxRLJVzhH"/>
+<!-- Floating Map Tools -->
+<div class="absolute right-4 top-4 flex flex-col gap-2">
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<div class="absolute right-4 bottom-4">
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+<!-- Map Info Overlay -->
+<div class="absolute bottom-6 left-6 p-4 bg-white/95 backdrop-blur-sm border border-outline-variant rounded-xl shadow-lg max-w-sm">
+<h5 class="font-title-lg text-title-lg mb-1">Akses Sekitar</h5>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">train</span>
+<span>5 Menit ke Stasiun Cibadak</span>
+</li>
+<li class="flex items-center gap-2 text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">local_hospital</span>
+<span>10 Menit ke RSUD Sekarwangi</span>
+</li>
+<li class="flex items-center gap-2 text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">shopping_cart</span>
+<span>8 Menit ke Pasar Cibadak</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-on-background dark:bg-surface-container-lowest border-t border-outline flat no shadows">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-md text-headline-md text-primary-fixed-dim">Sukabumi Housing GIS</span>
+<p class="text-surface-variant dark:text-on-surface-variant text-center md:text-left max-w-md font-body-md text-body-md">
+                © 2024 Sukabumi Housing GIS - Administrative Authority &amp; Geographical Data Services
+            </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-body-md text-body-md text-surface-variant dark:text-on-surface-variant hover:text-primary-fixed hover:underline decoration-primary-fixed transition-all" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-surface-variant dark:text-on-surface-variant hover:text-primary-fixed hover:underline decoration-primary-fixed transition-all" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-surface-variant dark:text-on-surface-variant hover:text-primary-fixed hover:underline decoration-primary-fixed transition-all" href="#">Developer Portal</a>
+<a class="font-body-md text-body-md text-surface-variant dark:text-on-surface-variant hover:text-primary-fixed hover:underline decoration-primary-fixed transition-all" href="#">GIS Documentation</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+                setTimeout(() => {
+                    ripples.remove();
+                }, 1000);
+            });
+        });
+
+        // Simple sticky header transparency change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.replace('bg-surface/90', 'bg-surface/100');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.replace('bg-surface/100', 'bg-surface/90');
+            }
+        });
+    </script>
+</body></html>

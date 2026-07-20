@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sukabumi Housing GIS - Admin Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#793200",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#95d4b3",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-background": "#0b1c30",
+                    "surface": "#f8f9ff",
+                    "outline-variant": "#bfc9c1",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#a8e7c5",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "on-secondary-container": "#fffbff",
+                    "tertiary-container": "#9e4400",
+                    "surface-dim": "#cbdbf5",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-fixed": "#001551",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#2c694e",
+                    "secondary-fixed-dim": "#b7c4ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#ffd0b8",
+                    "on-primary-fixed-variant": "#0e5138",
+                    "primary": "#0f5238",
+                    "primary-fixed": "#b1f0ce",
+                    "tertiary-fixed": "#ffdbca",
+                    "secondary-fixed": "#dce1ff",
+                    "surface-container-low": "#eff4ff",
+                    "primary-container": "#2d6a4f",
+                    "background": "#f8f9ff",
+                    "surface-container": "#e5eeff",
+                    "secondary-container": "#4069f2",
+                    "on-surface-variant": "#404943",
+                    "on-surface": "#0b1c30",
+                    "inverse-primary": "#95d4b3",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-primary-fixed": "#002114",
+                    "outline": "#707973",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#0039b5",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#1d4ed8",
+                    "on-tertiary-fixed": "#341100",
+                    "inverse-surface": "#213145",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "unit": "4px",
+                    "container-max-width": "1440px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "sidebar-width": "360px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "stats-number": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "title-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "stats-number": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            box-shadow: inset 4px 0 0 0 #0f5238;
+        }
+        body {
+            background-color: #f8f9ff;
+            font-family: 'Inter', sans-serif;
+        }
+        .bento-card {
+            background: white;
+            border: 1px solid #bfc9c1;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar-width bg-surface-container-lowest border-r border-outline-variant shadow-sm z-50 flex flex-col py-margin-desktop px-gutter">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Sukabumi GIS</h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Housing Admin</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">home_work</span>
+<span class="font-body-md text-body-md">Housing Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-body-md text-body-md">Developer Verification</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-body-md text-body-md">GIS Data Layers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center text-primary font-bold">AS</div>
+<div>
+<p class="font-body-md text-body-md font-bold">Admin Sukabumi</p>
+<p class="text-label-md text-on-surface-variant">Regional Supervisor</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-sidebar-width min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-360px)] h-20 bg-surface/80 backdrop-blur-md shadow-md z-40 flex items-center justify-between px-margin-desktop">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant w-96 group focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full" placeholder="Search projects, developers, or regions..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-100">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors scale-95 active:scale-100">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="Close-up professional portrait of a government administrative official wearing a neat uniform, soft professional studio lighting, Sukabumi city hall office background with subtle flags, high-end corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTX-LMSM7YenfUp7MN4_HQi70AOSfKT7DcILyBvZ9kwLDHKWudO6Hrarn9SO2bwgSwCzCQUJQFbL8os2RLbJ2u_fH3EaiU_4WwJmmywPwacBwJyW_nuaZyOXflmi_NoPFkzdZx10NnObA3GUkt03dha_e97WyukSp44Fpi-hfJl3xmDJndgICQYbsScM9-FbufYLi9DrldYyslhfNhyHZLCKQTTnuMuaPU0KMf_zWTlMbB-bcQ7cmx"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-32 px-margin-desktop pb-10 max-w-[1440px] mx-auto">
+<!-- Summary Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">home_work</span>
+<span class="text-label-md font-bold text-primary bg-primary-fixed px-2 py-1 rounded">GLOBAL</span>
+</div>
+<h3 class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Total Housing Projects</h3>
+<p class="font-stats-number text-stats-number text-on-surface mt-1">1,284</p>
+</div>
+<p class="text-label-md text-primary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                        24 new this month
+                    </p>
+</div>
+<div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed p-2 rounded-lg">pending_actions</span>
+<span class="text-label-md font-bold text-tertiary bg-tertiary-fixed px-2 py-1 rounded">URGENT</span>
+</div>
+<h3 class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Pending Verifications</h3>
+<p class="font-stats-number text-stats-number text-on-surface mt-1">12</p>
+</div>
+<p class="text-label-md text-tertiary mt-4">Needs immediate review</p>
+</div>
+<div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-secondary bg-secondary-fixed p-2 rounded-lg">business</span>
+<span class="text-label-md font-bold text-secondary bg-secondary-fixed px-2 py-1 rounded">ACTIVE</span>
+</div>
+<h3 class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Active Developers</h3>
+<p class="font-stats-number text-stats-number text-on-surface mt-1">186</p>
+</div>
+<p class="text-label-md text-secondary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                        86% verified status
+                    </p>
+</div>
+<div class="bento-card p-6 rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">query_stats</span>
+<span class="text-label-md font-bold text-primary bg-primary-fixed px-2 py-1 rounded">ENGAGEMENT</span>
+</div>
+<h3 class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Map View Analytics</h3>
+<p class="font-stats-number text-stats-number text-on-surface mt-1">+15%</p>
+</div>
+<p class="text-label-md text-primary mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                        High interest in Cisaat area
+                    </p>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Main Projects Table (Left Col) -->
+<div class="lg:col-span-2 space-y-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="px-6 py-5 border-b border-outline-variant flex items-center justify-between bg-white">
+<h2 class="font-title-lg text-title-lg text-on-surface">Housing Projects</h2>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-body-md font-bold flex items-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                                Add Project
+                            </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-label-md text-on-surface-variant uppercase">
+<tr>
+<th class="px-6 py-4 font-bold">Project Name</th>
+<th class="px-6 py-4 font-bold">Developer</th>
+<th class="px-6 py-4 font-bold">Location</th>
+<th class="px-6 py-4 font-bold">Status</th>
+<th class="px-6 py-4 font-bold">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md font-bold">Sukabumi Regency Heights</p>
+<p class="text-label-md text-on-surface-variant">Residential Complex</p>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">PT. Bangun Jaya</td>
+<td class="px-6 py-4 font-body-md text-body-md">Cisaat</td>
+<td class="px-6 py-4">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-md font-bold">Verified</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md font-bold">Green Valley Cibadak</p>
+<p class="text-label-md text-on-surface-variant">Subsidized Housing</p>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">Lestari Property Group</td>
+<td class="px-6 py-4 font-body-md text-body-md">Cibadak</td>
+<td class="px-6 py-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-md font-bold">Pending</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md font-bold">Puncak Wangi Estate</p>
+<p class="text-label-md text-on-surface-variant">Premium Villas</p>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">Global Inti Persada</td>
+<td class="px-6 py-4 font-body-md text-body-md">Sukabumi Selatan</td>
+<td class="px-6 py-4">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-md font-bold">Verified</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4">
+<p class="font-body-md text-body-md font-bold">Mega Mendung Residence</p>
+<p class="text-label-md text-on-surface-variant">Public Housing</p>
+</td>
+<td class="px-6 py-4 font-body-md text-body-md">Karya Mandiri Abadi</td>
+<td class="px-6 py-4 font-body-md text-body-md">Warungkiara</td>
+<td class="px-6 py-4">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-md font-bold">Verified</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-secondary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-white text-body-md">
+<p class="text-on-surface-variant">Showing 1 to 4 of 1,284 projects</p>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Cards (Right Col) -->
+<div class="space-y-gutter">
+<!-- Geospatial Insights Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-5 border-b border-outline-variant">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">distance</span>
+                                GIS Insights
+                            </h2>
+</div>
+<div class="relative h-64 bg-surface-container">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale opacity-60" data-location="Sukabumi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSuShaeDOOjzBJA5llqgHLsGrB4JnM5MRRTmIydV-TG-_L0xS8-oucFVYc1ysqKDrzYoN3dZRD3pzgjAz-Jz-PLgZe7puUx3hUZQJzhpqvS64HG-1NIMoJXYwdAx1NpcceW2KoViQ8yOVuFRnZnErRYf7usafH9vryzgw2cq8Y1ZksGtYyhDucBgus4EphFnYnS_VLWS7-9aUevJxjBUwXZW3f-9LOXFy7J_8Svzue3p_egPWroC-J"/>
+</div>
+<!-- Fake Heatmap UI -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent flex items-center justify-center pointer-events-none">
+<div class="w-24 h-24 bg-primary/20 rounded-full animate-pulse blur-xl"></div>
+<div class="w-32 h-32 bg-secondary/10 rounded-full absolute top-10 right-10 blur-xl"></div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-lg border border-outline-variant flex items-center justify-between">
+<p class="text-label-md font-bold text-on-surface">Density: Cisaat District</p>
+<span class="text-primary font-bold text-label-md">HIGH</span>
+</div>
+<div class="absolute top-4 right-4 flex flex-col gap-2">
+<button class="bg-white p-2 rounded-lg shadow-md border border-outline-variant text-on-surface hover:text-primary"><span class="material-symbols-outlined">add</span></button>
+<button class="bg-white p-2 rounded-lg shadow-md border border-outline-variant text-on-surface hover:text-primary"><span class="material-symbols-outlined">remove</span></button>
+</div>
+</div>
+<div class="p-5">
+<p class="text-body-md text-on-surface-variant mb-4">High-density housing concentration detected in northern Sukabumi Regency. Proposing 2 new data layers for land suitability.</p>
+<button class="w-full border border-primary text-primary py-2 rounded-lg font-bold text-body-md hover:bg-primary hover:text-on-primary transition-all">Open Full Map GIS</button>
+</div>
+</div>
+<!-- Recent Developer Registrations -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="p-5 border-b border-outline-variant flex items-center justify-between">
+<h2 class="font-title-lg text-title-lg text-on-surface">Recent Developers</h2>
+<a class="text-primary text-label-md font-bold hover:underline" href="#">See All</a>
+</div>
+<div class="p-5 space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-lg bg-surface-container p-2 object-contain" data-alt="Minimalist modern corporate logo for a construction company, featuring abstract geometric house shape in forest green and slate grey, professional branding asset on white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP5w1lVk4uK_spYcbb6N554i2ooAWn8LvVL7sGtHuVzESYD2qQgJdSmcLttK-pMSzebO_tQF27SmGi61ugeg1Kzw34Qu6ShFwdO-yM1jL8uuZBcTuyYMoVdEKXmdsGGRwJ6H9HCx0skUmop_J4sSjrz-gtsr8zhGecVtNzZRQGt_fA_wjIU9Tb33b0Dbc8ZjAnsdqmAKPeYKXngIEr8zCI5wsVAHgMG2Mhv-C2e5k02tdlhWC1MZGr"/>
+<div>
+<p class="font-body-md text-body-md font-bold">Citra Perkasa Ltd</p>
+<p class="text-label-md text-on-surface-variant">2 hours ago</p>
+</div>
+</div>
+<button class="text-primary-container bg-primary-fixed-dim px-3 py-1 rounded-full text-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">Review</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-lg bg-surface-container p-2 object-contain" data-alt="Modern architectural firm logo, stylized letter S integrated with urban skyline elements, deep navy and emerald green color scheme, clean vector style for housing developer corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK7HWQztTmEjbL-14hqTOq9J01aBhji1QXtUZtjnnFgWZTop8An9ALTfefP4NGdxVssmoEJ5Rrgbf4KWvjITmQugvNZi0lYoa1xy4kGQazMFjh3DbA4LYXVFAQ1KoqnYCClA09SvsPG9tMPMzGvTceZAq__nPqNqPS4WdVs-5GGIpAK-CbcGgn0YI5MmkrFvJZa9ew6U94rQJVjkx88ovmgEq5bGs0wYgaZ1rEuvqREX_KLDvSZh2K"/>
+<div>
+<p class="font-body-md text-body-md font-bold">Sukabumi Realty</p>
+<p class="text-label-md text-on-surface-variant">Oct 24, 2023</p>
+</div>
+</div>
+<button class="text-primary-container bg-primary-fixed-dim px-3 py-1 rounded-full text-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">Review</button>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 rounded-lg bg-surface-container p-2 object-contain" data-alt="Contemporary real estate logo, minimalist line art of mountain peaks merged with a building structure, representing geographical integration, professional flat design in corporate green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjoWYAyDMNnwd3Iu0ZQqGIDxqmGV3LNGKHc-FDbfylEU3EjnZP4SIJ6ffJVa-t7dVP-6nhCMm3_K2hOjDxqoMytuMOX-Soz5cnCo8-x1FcsthKoHFlXik4ne_Q70T_GbL-lGO0caNc5RwJfeUXBq7W2BL3CRs_sBEPLtjkty1f_PdC5oYZE0K9Y6l5FxTAaT6bT9ff6qxT0TLyTqV3AnGCjrJbczC9O-s-3oHnZ0yoGX7bnY_2FoRP"/>
+<div>
+<p class="font-body-md text-body-md font-bold">Mountain View Dev</p>
+<p class="text-label-md text-on-surface-variant">Oct 23, 2023</p>
+</div>
+</div>
+<button class="text-primary-container bg-primary-fixed-dim px-3 py-1 rounded-full text-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-colors">Review</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Zoning Legend (Specialized list) -->
+<div class="mt-8 bg-surface p-6 rounded-xl border border-outline-variant border-dashed">
+<h3 class="font-title-lg text-title-lg mb-4 text-on-surface-variant">Zoning Map Legend</h3>
+<div class="flex flex-wrap gap-6">
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-primary rounded-sm"></div>
+<span class="text-body-md text-on-surface-variant">Forest / Protected Area</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-secondary-container rounded-sm"></div>
+<span class="text-body-md text-on-surface-variant">Residential Zone</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-tertiary-container rounded-sm"></div>
+<span class="text-body-md text-on-surface-variant">Commercial Area</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-yellow-500 rounded-sm"></div>
+<span class="text-body-md text-on-surface-variant">Agricultural Land</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-4 h-4 bg-error rounded-sm"></div>
+<span class="text-body-md text-on-surface-variant">High Risk Disaster Zone</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (Dashboard Level) -->
+<button class="fixed bottom-10 right-10 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl">add_location_alt</span>
+</button>
+<script>
+        // Micro-interaction for sidebar links
+        document.querySelectorAll('aside nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // In a real app, navigation would happen. Here we just toggle styles.
+                document.querySelectorAll('aside nav a').forEach(l => {
+                    l.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                    l.classList.add('text-on-surface-variant');
+                });
+                this.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+                this.classList.remove('text-on-surface-variant');
+            });
+        });
+
+        // Simple Fade-in Animation for Content
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bento-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease-out ' + (index * 0.1) + 's';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

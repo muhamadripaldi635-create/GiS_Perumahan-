@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "name": "perumahan",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PH-001",
+        "nama": "Griya Cibadak Asri",
+        "kecamatan": "Cibadak",
+        "desa": "Cibadak",
+        "alamat": "Jl. Raya Cibadak",
+        "harga_min": 350000000,
+        "harga_max": 450000000,
+        "jenis": "Cluster"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.8261, -6.9148]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PH-002",
+        "nama": "Permata Parungkuda",
+        "kecamatan": "Parungkuda",
+        "desa": "Parungkuda",
+        "alamat": "Jl. Raya Parungkuda",
+        "harga_min": 300000000,
+        "harga_max": 420000000,
+        "jenis": "Perumahan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.8124, -7.0012]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PH-003",
+        "nama": "Bumi Nagrak Indah",
+        "kecamatan": "Nagrak",
+        "desa": "Nagrak",
+        "alamat": "Jl. Nagrak Timur",
+        "harga_min": 280000000,
+        "harga_max": 380000000,
+        "jenis": "Perumahan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.8415, -6.9126]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "PH-004",
+        "nama": "Cicurug Residence",
+        "kecamatan": "Cicurug",
+        "desa": "Cicurug",
+        "alamat": "Jl. Raya Cicurug",
+        "harga_min": 320000000,
+        "harga_max": 500000000,
+        "jenis": "Residensial"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.7832, -6.7784]
+      }
+    }
+  ]
+}

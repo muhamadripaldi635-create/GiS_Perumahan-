@@ -1,0 +1,574 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GIS Perumahan Kabupaten Sukabumi</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#0b1c30",
+                    "surface-tint": "#2c694e",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#cbdbf5",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#0039b5",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#1d4ed8",
+                    "on-secondary-fixed": "#001551",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-container": "#fffbff",
+                    "inverse-primary": "#95d4b3",
+                    "tertiary-container": "#9e4400",
+                    "surface-bright": "#f8f9ff",
+                    "primary": "#0f5238",
+                    "primary-fixed": "#b1f0ce",
+                    "tertiary-fixed": "#ffdbca",
+                    "secondary-fixed-dim": "#b7c4ff",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#bfc9c1",
+                    "surface-variant": "#d3e4fe",
+                    "background": "#f8f9ff",
+                    "on-primary-fixed": "#002114",
+                    "primary-container": "#2d6a4f",
+                    "on-tertiary-fixed": "#341100",
+                    "outline": "#707973",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "on-tertiary-container": "#ffd0b8",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#e5eeff",
+                    "inverse-surface": "#213145",
+                    "secondary-fixed": "#dce1ff",
+                    "on-surface-variant": "#404943",
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#793200",
+                    "surface-container-low": "#eff4ff",
+                    "error": "#ba1a1a",
+                    "on-background": "#0b1c30",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#4069f2",
+                    "surface": "#f8f9ff",
+                    "primary-fixed-dim": "#95d4b3",
+                    "on-tertiary-fixed-variant": "#783200",
+                    "on-primary-fixed-variant": "#0e5138",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-primary-container": "#a8e7c5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "sidebar-width": "360px",
+                    "unit": "4px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max-width": "1440px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "stats-number": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "stats-number": ["28px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        .stats-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm h-20">
+<div class="flex justify-between items-center px-margin-desktop h-full w-full max-w-container-max-width mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Sukabumi GIS Housing</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-title-lg text-title-lg" href="#">Interactive Map</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-title-lg text-title-lg" href="#">Statistics</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-title-lg text-title-lg" href="#">Developers</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-title-lg text-title-lg" href="#">User Portal</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 rounded-full font-bold text-primary active:scale-95 transition-transform">Sign In</button>
+<button class="px-6 py-2 rounded-full font-bold bg-primary text-on-primary active:scale-95 transition-transform">Register</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[870px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/80 to-transparent z-10"></div>
+<div class="w-full h-full bg-cover bg-center" data-alt="A wide panoramic landscape of the Sukabumi Regency mountains and lush green valleys under a soft morning mist. The lighting is ethereal and high-contrast, highlighting the natural beauty of West Java. The overall style is professional, clean, and serene, using the brand's signature emerald greens and deep blues to create a trustworthy administrative aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAv0zSX-xvCxPnNWu1YsVvb0JNXjzJjzuXI5pcePWJZjgTY60qkwcXGB65Rr5zStSoSFLeQWzObI6Vj-xTyrTZvRTdYoES741m-maXi-27eGKFv9jWp1yxUbLHeWGhbWsrLHPEWeOIvqk57AE4KnwPZtIESGwK3Uz1PqZFNSoMBqh4dctrmDqBKuMz0p9t5JW-j5AEOh6R4SXom9ZNeMzu6IiM7MotriRpchhVARQI1yfibOY5upP_p')"></div>
+</div>
+<div class="relative z-20 px-margin-desktop max-w-container-max-width mx-auto w-full">
+<div class="max-w-2xl text-on-primary">
+<h1 class="font-display-lg text-display-lg mb-6 leading-tight">Sistem Informasi Geografis Perumahan Kabupaten Sukabumi</h1>
+<p class="font-body-lg text-body-lg mb-8 opacity-90">Temukan hunian impian Anda dengan presisi geografis. Akses data perumahan terpadu, legalitas pengembang, dan analisis wilayah dalam satu platform digital resmi.</p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-secondary text-on-secondary rounded-xl font-bold flex items-center gap-2 hover:bg-secondary/90 transition-all">
+<span class="material-symbols-outlined">map</span>
+                            Mulai Penelusuran
+                        </button>
+<button class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-all">
+                            Panduan Pengguna
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Housing Statistics -->
+<section class="relative z-30 -mt-16 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="stats-card bg-white p-8 rounded-2xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">location_city</span>
+<span class="font-stats-number text-stats-number text-on-surface">1.284</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-2">Total Perumahan</span>
+</div>
+<div class="stats-card bg-white p-8 rounded-2xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">home_work</span>
+<span class="font-stats-number text-stats-number text-on-surface">4.520</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-2">Unit Tersedia</span>
+</div>
+<div class="stats-card bg-white p-8 rounded-2xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4">verified_user</span>
+<span class="font-stats-number text-stats-number text-on-surface">186</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-2">Pengembang Terdaftar</span>
+</div>
+<div class="stats-card bg-white p-8 rounded-2xl shadow-lg border border-outline-variant/20 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-surface-tint text-4xl mb-4">public</span>
+<span class="font-stats-number text-stats-number text-on-surface">47</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mt-2">Kecamatan Tercover</span>
+</div>
+</div>
+</section>
+<!-- Interactive Map Preview -->
+<section class="py-24 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Eksplorasi Wilayah Interaktif</h2>
+<p class="text-on-surface-variant font-body-lg max-w-2xl">Gunakan peta GIS kami untuk memfilter lokasi berdasarkan kebutuhan spesifik Anda. Transparansi data adalah prioritas kami.</p>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold hover:underline">
+                    Lihat Peta Layar Penuh <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/30 group">
+<!-- Map UI Mockup -->
+<div class="absolute inset-0 bg-slate-200" data-location="Sukabumi">
+<img class="w-full h-full object-cover grayscale-[20%]" data-alt="A clean, minimalist vector-style map of Sukabumi Regency showing topographical features and district boundaries. The map uses a soft palette of professional blues and greens with semi-transparent overlays for housing zones. Icons of small houses and location pins are scattered across the map in a high-density, high-contrast data visualization style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB52e8o1TbR5NCvJq3W6itAZL0HFE6Ju57sLqK3HRDLkfcHiker20FqiLnEb2bOKC0zwJ07RvpZEkRzuD7A4izhzZEPwFJ5lxDzhDvZxkT2U456gyZvJMuZrqtdNgdnP7duQTExOzmQ9BOz5OhI7CQszNn8F77YUrCHedThcknVaYtL-8vBgZMYiCV8jup2tmD7A80waeu21zGQyXysgqvTj6bs_mmBZ3tbVt_qrbVxVw9RdzNbwdvx">
+<!-- Interactive Pins -->
+<div class="absolute top-1/3 left-1/2 group/pin cursor-pointer z-30" onclick="document.getElementById('map-popup-1').classList.remove('hidden')">
+    <span class="material-symbols-outlined text-primary text-3xl drop-shadow-md transition-transform group-hover/pin:scale-125 group-hover/pin:-translate-y-1" style="font-variation-settings: 'FILL' 1;">location_on</span>
+    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-on-surface text-white text-xs rounded opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Griya Sukabumi Indah</div>
+</div>
+
+<div class="absolute top-1/2 left-1/3 group/pin cursor-pointer z-30" onclick="document.getElementById('map-popup-2').classList.remove('hidden')">
+    <span class="material-symbols-outlined text-secondary text-3xl drop-shadow-md transition-transform group-hover/pin:scale-125 group-hover/pin:-translate-y-1" style="font-variation-settings: 'FILL' 1;">location_on</span>
+    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-on-surface text-white text-xs rounded opacity-0 group-hover/pin:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Puncak Pelangi</div>
+</div>
+
+<!-- Property Popups -->
+<div id="map-popup-1" class="hidden absolute top-1/4 left-1/2 -translate-x-1/2 z-40 w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-outline-variant/30 animate-in fade-in zoom-in duration-200">
+    <div class="relative h-32">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbGKSyTt48_38bl4Zm2wY8jEhrJ19XLktNDQsc7fnwLx15y0-8gKj6GWLc1pvPouRgWCi8DPMYW2JTaRUX_CxP-LyBr-0wf6DxxEs4-6WFUkixJNlVXmQiVw4pyGbWlyVGA3SdLrVoD3-a48a6IxBYzd85QP8Qgj81XPS14kwzYOAOHc2b-PCOtg4AHVhzqjS8K3b9Inx55SYFCsLAcA3VPP_KAaeRQFn4PRBtmZkaaTq4um8DvDUM" class="w-full h-full object-cover" alt="Property">
+        <button onclick="event.stopPropagation(); document.getElementById('map-popup-1').classList.add('hidden')" class="absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm hover:bg-white">
+            <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <h5 class="font-bold text-on-surface text-sm mb-1">Griya Sukabumi Indah</h5>
+        <p class="text-xs text-on-surface-variant mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">location_on</span> Cibadak, Sukabumi</p>
+        <p class="text-primary font-bold text-sm">Rp 160jt - 350jt</p>
+    </div>
+</div>
+
+<div id="map-popup-2" class="hidden absolute top-1/3 left-1/4 z-40 w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-outline-variant/30 animate-in fade-in zoom-in duration-200">
+    <div class="relative h-32">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2MmbWFtFQnDKKJFQpSpvsjfbsjEOYMcbms-mCTFjgvZt2hMAmV6AAIOD2Dtg2_HepTh0YXx9a1JgDZDU1HNQfGckhRX8tShGDH53WGap4RIUkmA1aa03lUEsxKM0C0EO9zTY8e11K_QR1idUqNxAlatkvbwjQ03z2OBDTr4gggRTcA_LdQoHxnBg8QnMhHXG6vD1NiOcfWAS0ZgkyOGOR_hzRXQACdxtHKYRJ9F8Yi4tnCn4vcLxS" class="w-full h-full object-cover" alt="Property">
+        <button onclick="event.stopPropagation(); document.getElementById('map-popup-2').classList.add('hidden')" class="absolute top-2 right-2 w-8 h-8 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-sm hover:bg-white">
+            <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <h5 class="font-bold text-on-surface text-sm mb-1">Puncak Pelangi Residence</h5>
+        <p class="text-xs text-on-surface-variant mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-xs">location_on</span> Cisaat, Sukabumi</p>
+        <p class="text-primary font-bold text-sm">Rp 450jt - 900jt</p>
+    </div>
+</div></div>
+<!-- Floating Sidebar Controls -->
+<div class="absolute left-6 top-6 bottom-6 w-80 map-glass rounded-2xl p-6 shadow-xl z-20 flex flex-col gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border-outline bg-white/50 focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="Cari Perumahan..." type="text">
+</div>
+<div class="space-y-4">
+<label class="font-bold text-on-surface">Filter Wilayah</label>
+<select class="w-full p-3 rounded-xl border-outline bg-white/50 outline-none">
+<option>Semua Kecamatan</option>
+<option>Cibadak</option>
+<option>Cisaat</option>
+<option>Palabuhanratu</option>
+</select>
+</div>
+<div class="space-y-4">
+<label class="font-bold text-on-surface">Tipe Rumah</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-sm font-medium">Subsidi</button>
+<button class="px-4 py-2 bg-white/50 border border-outline-variant text-on-surface-variant rounded-full text-sm font-medium">Komersil</button>
+<button class="px-4 py-2 bg-white/50 border border-outline-variant text-on-surface-variant rounded-full text-sm font-medium">Townhouse</button>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-bold text-on-surface">Status Pembangunan</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="rounded text-primary focus:ring-primary h-5 w-5 border-outline-variant" type="checkbox">
+<span class="text-on-surface-variant">Tersedia (Ready)</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary h-5 w-5 border-outline-variant" type="checkbox">
+<span class="text-on-surface-variant">Indent</span>
+</label>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant">
+<button class="w-full py-4 bg-primary text-on-primary rounded-xl font-bold active:scale-95 transition-transform">Terapkan Filter</button>
+</div>
+</div>
+<!-- Floating Map Tools -->
+<div class="absolute right-6 top-6 flex flex-col gap-2">
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-white shadow-md rounded-lg flex items-center justify-center mt-4 hover:bg-slate-50 transition-colors text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</button>
+</div>
+<!-- Zoning Legend -->
+<div class="absolute right-6 bottom-6 map-glass p-4 rounded-xl shadow-lg">
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 bg-primary rounded"></div>
+<span class="text-xs font-bold text-on-surface-variant">Area Residensial</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 bg-tertiary-container rounded"></div>
+<span class="text-xs font-bold text-on-surface-variant">Lahan Pertanian</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 bg-secondary rounded"></div>
+<span class="text-xs font-bold text-on-surface-variant">Hutan Lindung</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- User Features (Bento Style) -->
+<section class="bg-surface-container-low py-24 px-margin-desktop">
+<div class="max-w-container-max-width mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Layanan Unggul Untuk Warga</h2>
+<p class="text-on-surface-variant font-body-lg max-w-xl mx-auto">Teknologi GIS kami memastikan Anda mendapatkan data paling akurat dan terpercaya untuk investasi masa depan.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-white p-10 rounded-3xl border border-outline-variant/30 flex flex-col items-start shadow-sm hover:shadow-xl transition-all group">
+<div class="w-16 h-16 bg-primary-fixed rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-3xl">location_on</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Pencarian Presisi</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Cari lokasi rumah berdasarkan radius dari fasilitas umum, sekolah, rumah sakit, dan pusat transportasi dengan akurasi koordinat GPS.</p>
+<a class="mt-auto text-primary font-bold flex items-center gap-2" href="#">Pelajari Selengkapnya <span class="material-symbols-outlined text-sm">arrow_outward</span></a>
+</div>
+<div class="bg-white p-10 rounded-3xl border border-outline-variant/30 flex flex-col items-start shadow-sm hover:shadow-xl transition-all group">
+<div class="w-16 h-16 bg-secondary-fixed rounded-2xl flex items-center justify-center mb-8 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-3xl">fact_check</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Informasi Legalitas</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Verifikasi status IMB/PBG, sertifikat tanah, dan kredibilitas pengembang yang telah diverifikasi oleh Pemerintah Kabupaten Sukabumi.</p>
+<a class="mt-auto text-primary font-bold flex items-center gap-2" href="#">Cek Legalitas <span class="material-symbols-outlined text-sm">arrow_outward</span></a>
+</div>
+<div class="bg-white p-10 rounded-3xl border border-outline-variant/30 flex flex-col items-start shadow-sm hover:shadow-xl transition-all group">
+<div class="w-16 h-16 bg-tertiary-fixed rounded-2xl flex items-center justify-center mb-8 group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
+<span class="material-symbols-outlined text-3xl">analytics</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Statistik Wilayah</h3>
+<p class="text-on-surface-variant leading-relaxed mb-6">Dapatkan data tren harga properti, kepadatan penduduk, dan rencana tata ruang wilayah (RTRW) untuk pengambilan keputusan cerdas.</p>
+<a class="mt-auto text-primary font-bold flex items-center gap-2" href="#">Lihat Data <span class="material-symbols-outlined text-sm">arrow_outward</span></a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Listings -->
+<section class="py-24 px-margin-desktop max-w-container-max-width mx-auto">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Proyek Pilihan Minggu Ini</h2>
+<p class="text-on-surface-variant font-body-lg">Rekomendasi perumahan terbaik dengan fasilitas lengkap di lokasi strategis.</p>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Listing Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6 shadow-md">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="A modern tropical housing complex with clean white architecture and extensive greenery. The scene is bright and airy, with clear blue skies and children playing in a central park area. The lighting is sunny and warm, emphasizing the 'Sukabumi Green' environmental aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCbGKSyTt48_38bl4Zm2wY8jEhrJ19XLktNDQsc7fnwLx15y0-8gKj6GWLc1pvPouRgWCi8DPMYW2JTaRUX_CxP-LyBr-0wf6DxxEs4-6WFUkixJNlVXmQiVw4pyGbWlyVGA3SdLrVoD3-a48a6IxBYzd85QP8Qgj81XPS14kwzYOAOHc2b-PCOtg4AHVhzqjS8K3b9Inx55SYFCsLAcA3VPP_KAaeRQFn4PRBtmZkaaTq4um8DvDUM')"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-primary text-on-primary text-xs font-bold rounded-full">Tersedia</span>
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-on-surface text-xs font-bold rounded-full">Subsidi</span>
+</div>
+<button class="absolute bottom-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-error">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Griya Sukabumi Indah</h4>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-sm">Kec. Cibadak, Sukabumi</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-primary font-bold text-lg">Rp 160jt - 350jt</p>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bed</span> <span class="text-xs">2</span></div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">square_foot</span> <span class="text-xs">36m²</span></div>
+</div>
+</div>
+</div>
+<!-- Listing Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6 shadow-md">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="High-end luxury townhouse neighborhood with elegant brick and glass facades. The street is wide, clean, and lined with manicured lawns and modern street lamps. Golden hour lighting creates a prestigious and warm atmosphere, suitable for a corporate housing portfolio." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2MmbWFtFQnDKKJFQpSpvsjfbsjEOYMcbms-mCTFjgvZt2hMAmV6AAIOD2Dtg2_HepTh0YXx9a1JgDZDU1HNQfGckhRX8tShGDH53WGap4RIUkmA1aa03lUEsxKM0C0EO9zTY8e11K_QR1idUqNxAlatkvbwjQ03z2OBDTr4gggRTcA_LdQoHxnBg8QnMhHXG6vD1NiOcfWAS0ZgkyOGOR_hzRXQACdxtHKYRJ9F8Yi4tnCn4vcLxS')"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-secondary text-on-secondary text-xs font-bold rounded-full">Pre-Launch</span>
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-on-surface text-xs font-bold rounded-full">Komersil</span>
+</div>
+<button class="absolute bottom-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Puncak Pelangi Residence</h4>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-sm">Kec. Cisaat, Sukabumi</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-primary font-bold text-lg">Rp 450jt - 900jt</p>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bed</span> <span class="text-xs">3</span></div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">square_foot</span> <span class="text-xs">72m²</span></div>
+</div>
+</div>
+</div>
+<!-- Listing Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 rounded-2xl overflow-hidden mb-6 shadow-md">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="A tranquil lakeside residential area with eco-friendly timber-clad houses. The surrounding nature is pristine, with a calm lake reflecting the lush forest. The visual style is highly environmental and peaceful, emphasizing a sustainable living lifestyle in Sukabumi's highland areas." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrlRqW6NTwjrb0GN4ORkCiUbYmI2jUiLi3Hel8IQq-Zc4i9VGcJb-JM9fTF2BWOhYJoecoyboM9Ton5zFYhMQLmt_gPhoqFF1H9XeXiyFu3J8aRktjAhIn2w8o7wi8MMVMJ8Lib27SsWPEOlBSGlyhd4FP_vn8LA2BOa2zd9ioYnkJcpzOaNLX3-xLgwEzSk3s6xRnCaHnaxxGaoLH51jE29rJ_ijD86upiSzmOdRM8Xl1f2Z6cPqQ')"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-3 py-1 bg-primary text-on-primary text-xs font-bold rounded-full">Siap Huni</span>
+<span class="px-3 py-1 bg-white/90 backdrop-blur-md text-on-surface text-xs font-bold rounded-full">Premium</span>
+</div>
+<button class="absolute bottom-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">Palabuhanratu Waterfront</h4>
+<div class="flex items-center gap-1 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-sm">Kec. Palabuhanratu, Sukabumi</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-primary font-bold text-lg">Rp 750jt - 2.1M</p>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bed</span> <span class="text-xs">4</span></div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">square_foot</span> <span class="text-xs">120m²</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA for Developers -->
+<section class="py-24 px-margin-desktop">
+<div class="max-w-container-max-width mx-auto bg-primary-container rounded-[40px] p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center gap-12">
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-10">
+<span class="material-symbols-outlined text-[300px] -mr-32 -mt-20">apartment</span>
+</div>
+<div class="relative z-10 flex-1 text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg text-on-primary-container mb-6">Anda Seorang Pengembang?</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container/80 mb-8 max-w-xl">Daftarkan proyek perumahan Anda di platform resmi GIS Kabupaten Sukabumi untuk menjangkau lebih banyak calon pembeli dan mempermudah proses administrasi pertanahan.</p>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<button class="px-10 py-5 bg-white text-primary rounded-2xl font-extrabold shadow-xl hover:scale-105 transition-transform">Daftar Sekarang</button>
+<button class="px-10 py-5 bg-primary text-on-primary border border-primary-fixed rounded-2xl font-bold flex items-center gap-2 hover:bg-primary/80">Hubungi Helpdesk <span class="material-symbols-outlined text-sm">support_agent</span></button>
+</div>
+</div>
+<div class="flex-1 w-full max-w-md relative z-10 hidden md:block">
+<div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl transform rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+<h4 class="font-bold text-white mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary-fixed">verified</span> Keuntungan Bergabung</h4>
+<ul class="space-y-4 text-white/90">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed">check_circle</span> Eksposur ke Ribuan Calon Pembeli</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed">check_circle</span> Sistem Pengajuan Izin Terintegrasi</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed">check_circle</span> Dashboard Analisis Pasar Wilayah</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary-fixed">check_circle</span> Verifikasi Legalitas Resmi</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface text-surface-dim pt-20 pb-12 px-margin-desktop">
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary-fixed text-3xl">domain</span>
+<span class="font-headline-md text-headline-md text-on-primary font-bold">GIS Sukabumi</span>
+</div>
+<p class="text-surface-dim opacity-80 mb-8 leading-relaxed">Penyedia data perumahan berbasis spasial yang dikelola oleh Dinas Perumahan dan Kawasan Permukiman (DPKP) Kabupaten Sukabumi.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-surface-dim/30 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="material-symbols-outlined text-sm">public</span></a>
+<a class="w-10 h-10 rounded-full border border-surface-dim/30 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="material-symbols-outlined text-sm">share</span></a>
+<a class="w-10 h-10 rounded-full border border-surface-dim/30 flex items-center justify-center hover:bg-primary transition-colors" href="#"><span class="material-symbols-outlined text-sm">mail</span></a>
+</div>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-white mb-6 text-lg">Menu Utama</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Peta Interaktif</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Data Statistik</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Daftar Pengembang</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Panduan RTRW</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-white mb-6 text-lg">Informasi Legal</h5>
+<ul class="space-y-4">
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Terms of Service</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">Government Portal</a></li>
+<li class=""><a class="text-surface-dim opacity-80 hover:opacity-100 hover:text-primary-fixed transition-all" href="#">GIS Data Source</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h5 class="font-bold text-white mb-6 text-lg">Hubungi Kami</h5>
+<ul class="space-y-4">
+<li class="flex gap-3 text-surface-dim opacity-80">
+<span class="material-symbols-outlined text-primary-fixed">location_on</span>
+<span class="">Jl. Raya Palabuhanratu No. 123, Kabupaten Sukabumi, Jawa Barat</span>
+</li>
+<li class="flex gap-3 text-surface-dim opacity-80">
+<span class="material-symbols-outlined text-primary-fixed">call</span>
+<span class="">(0266) 1234567</span>
+</li>
+<li class="flex gap-3 text-surface-dim opacity-80">
+<span class="material-symbols-outlined text-primary-fixed">mail</span>
+<span class="">disperkim@sukabumikab.go.id</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-surface-dim/20 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+<p class="text-surface-dim opacity-80 font-body-md text-body-md">© 2024 Sukabumi Regency Government Housing Office. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-surface-dim opacity-80 hover:opacity-100" href="#">Bantuan</a>
+<a class="text-surface-dim opacity-80 hover:opacity-100" href="#">Keamanan</a>
+<a class="text-surface-dim opacity-80 hover:opacity-100" href="#">Aksesibilitas</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and Lightweight Atmospheric Effects
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.stats-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                }
+            });
+        });
+
+        // Simple counter animation for stats
+        const counters = document.querySelectorAll('.font-stats-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = parseInt(target.innerText.replace(',', ''));
+                    let count = 0;
+                    const duration = 2000;
+                    const increment = Math.ceil(finalValue / (duration / 16));
+                    
+                    const updateCount = () => {
+                        count += increment;
+                        if (count < finalValue) {
+                            target.innerText = count.toLocaleString();
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            target.innerText = finalValue.toLocaleString();
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => observer.observe(counter));
+    </script>
+
+
+</body></html>
