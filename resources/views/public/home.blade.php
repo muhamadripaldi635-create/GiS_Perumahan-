@@ -38,8 +38,8 @@
 @endphp
 
 <section
-    class="relative min-h-screen bg-cover bg-center bgg-no-repeat"
-    style="background-image: url('{{ asset('storage/bgg.jpg') }}');">
+   class="relative min-h-screen bg-cover bg-center bg-no-repeat"
+style="background-image: url('{{ asset('bgg.jpg') }}');">
 
     <!-- Overlay -->
     <div class="absolute inset-0 bg-black/40"></div>
